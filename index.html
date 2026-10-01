@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Không tìm thấy trang</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f4f6f8;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: #333;
+    }
+    .card {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      max-width: 480px;
+      width: 90%;
+    }
+    .status-code {
+      font-size: 72px;
+      font-weight: 800;
+      color: #ff4d4f;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 12px;
+      color: #1a1a1a;
+    }
+    p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+    .btn-back {
+      background-color: #f0f0f0;
+      color: #333;
+      border-color: #d9d9d9;
+    }
+    .btn-back:hover {
+      background-color: #e4e4e4;
+    }
+    .btn-home {
+      background-color: #1677ff;
+      color: #ffffff;
+    }
+    .btn-home:hover {
+      background-color: #0958d9;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="status-code">404</div>
+    <h1>Không tìm thấy trang yêu cầu</h1>
+   <p>
+  Địa chỉ bạn truy cập có thể không tồn tại hoặc tài khoản của bạn chưa được cấp quyền vào màn hình này. Vui lòng chọn hành động tiếp theo bên dưới.
+</p>
+    <div class="btn-group">
+      <button class="btn btn-back" onclick="window.history.back()">← Quay lại trang trước</button>
+      <a href="#" class="btn btn-home" onclick="alert('Điều hướng về trang chủ!')">Về trang chủ</a>
+    </div>
+  </div>
+</body>
+</html>

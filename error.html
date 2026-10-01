@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thông báo lỗi hệ thống - K15C6</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background-color: #f0f2f5;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Thanh Header / Navbar chuẩn giao diện ứng dụng */
+    header {
+      height: 56px;
+      background-color: #001529;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 10;
+    }
+    .logo {
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .user-info {
+      font-size: 14px;
+      color: #bfbfbf;
+    }
+
+    /* Thân ứng dụng gồm Sidebar + Vùng hiển thị lỗi */
+    .app-body {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 56px);
+    }
+
+    /* Menu Sidebar bên trái */
+    aside {
+      width: 230px;
+      background-color: #ffffff;
+      border-right: 1px solid #e8e8e8;
+      display: flex;
+      flex-direction: column;
+      padding: 16px 0;
+    }
+    aside a {
+      padding: 12px 24px;
+      color: #595959;
+      text-decoration: none;
+      font-size: 14px;
+      display: block;
+      transition: all 0.2s;
+    }
+    aside a:hover, aside a.active {
+      background-color: #e6f7ff;
+      color: #1677ff;
+      border-right: 3px solid #1677ff;
+      font-weight: 600;
+    }
+
+    /* Vùng hiển thị nội dung lỗi */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow-y: auto;
+    }
+    .error-card {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      text-align: center;
+      max-width: 520px;
+      width: 100%;
+    }
+    .error-code {
+      font-size: 80px;
+      font-weight: 800;
+      color: #fa8c16;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .error-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #262626;
+      margin-bottom: 12px;
+    }
+    .error-desc {
+      font-size: 14px;
+      color: #8c8c8c;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    /* Nút hành động */
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: 0.2s;
+    }
+    .btn-primary {
+      background-color: #1677ff;
+      color: #ffffff;
+    }
+    .btn-primary:hover {
+      background-color: #0958d9;
+    }
+    .btn-default {
+      background-color: #ffffff;
+      color: #595959;
+      border-color: #d9d9d9;
+    }
+    .btn-default:hover {
+      border-color: #1677ff;
+      color: #1677ff;
+    }
+
+    /* Các nút chuyển đổi chế độ xem thử lỗi 403 / 404 */
+    .switch-mode {
+      margin-top: 24px;
+      font-size: 13px;
+      color: #8c8c8c;
+      border-top: 1px dashed #e8e8e8;
+      padding-top: 16px;
+    }
+    .switch-mode button {
+      margin: 0 4px;
+      padding: 5px 12px;
+      border-radius: 4px;
+      border: 1px solid #d9d9d9;
+      background: #fafafa;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .switch-mode button:hover {
+      background: #e6f7ff;
+      border-color: #1677ff;
+      color: #1677ff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header chung của ứng dụng -->
+  <header>
+    <div class="logo">
+      <span>🛡️</span> Hệ thống Quản trị K15C6
+    </div>
+    <div class="user-info">
+      Tài khoản: Người dùng
+    </div>
+  </header>
+
+  <div class="app-body">
+    <!-- Thanh Sidebar menu -->
+    <aside>
+      <a href="#" onclick="showHome()">Trang chủ</a>
+      <a href="#" id="menu-404" onclick="showError('404')">Truy cập nhầm chỗ (404)</a>
+      <a href="#" id="menu-403" onclick="showError('403')" class="active">Không đủ quyền (403)</a>
+    </aside>
+
+    <!-- Nội dung hiển thị lỗi -->
+    <main>
+      <div class="error-card">
+        <div id="errCode" class="error-code">403</div>
+        <div id="errTitle" class="error-title">Không đủ quyền truy cập</div>
+        <p id="errDesc" class="error-desc">
+          Tài khoản của bạn chưa được cấp quyền truy cập vào chức năng này. Vui lòng liên hệ quản trị viên hoặc quay lại trang an toàn.
+        </p>
+
+        <div class="btn-group">
+          <button class="btn btn-default" onclick="window.history.back()">← Quay lại trang trước</button>
+          <button class="btn btn-primary" onclick="showHome()">Về trang an toàn</button>
+        </div>
+
+        <div class="switch-mode">
+          Chuyển màn hình kiểm tra:
+          <button onclick="showError('403')">Lỗi 403 (Không đủ quyền)</button>
+          <button onclick="showError('404')">Lỗi 404 (Nhầm chỗ)</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function showError(type) {
+      const code = document.getElementById('errCode');
+      const title = document.getElementById('errTitle');
+      const desc = document.getElementById('errDesc');
+      const menu403 = document.getElementById('menu-403');
+      const menu404 = document.getElementById('menu-404');
+
+      if (type === '403') {
+        code.innerText = '403';
+        code.style.color = '#fa8c16';
+        title.innerText = 'Không đủ quyền truy cập';
+        desc.innerText = 'Tài khoản của bạn chưa được cấp quyền truy cập vào chức năng này. Vui lòng liên hệ quản trị viên hoặc quay lại trang an toàn.';
+        menu403.classList.add('active');
+        menu404.classList.remove('active');
+      } else {
+        code.innerText = '404';
+        code.style.color = '#ff4d4f';
+        title.innerText = 'Không tìm thấy trang yêu cầu';
+        desc.innerText = 'Đường dẫn bạn vừa truy cập không tồn tại hoặc đã bị gỡ bỏ khỏi hệ thống.';
+        menu404.classList.add('active');
+        menu403.classList.remove('active');
+      }
+    }
+
+    function showHome() {
+      alert('Đã điều hướng quay lại luồng làm việc / Trang chủ an toàn!');
+    }
+  </script>
+</body>
+</html>
